@@ -151,7 +151,6 @@ export PYTHONDONTWRITEBYTECODE=1
 # # Amazon Q post block. Keep at the bottom of this file.
 # [[ -f "${HOME}/Library/Application Support/amazon-q/shell/zshrc.post.zsh" ]] && builtin source "${HOME}/Library/Application Support/amazon-q/shell/zshrc.post.zsh"
 
-echo $HOME
 alias ca="conda deactivate; conda activate"
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
