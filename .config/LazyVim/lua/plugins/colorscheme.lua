@@ -18,7 +18,7 @@ end
 return {
   { "ellisonleao/gruvbox.nvim" },
   { "rebelot/kanagawa.nvim" },
-  { "catppuccin/catppuccin.nvim" },
+  { "catppuccin/nvim", name = "catppuccin", priority = 1000 },
   {
     "folke/tokyonight.nvim",
     lazy = false,
