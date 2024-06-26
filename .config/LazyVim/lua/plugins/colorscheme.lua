@@ -4,14 +4,12 @@ local function getColorScheme()
 
   local color
 
-  if currentHour >= 6 and currentHour < 10 then
-    color = "rose-pine-moon"
-  elseif currentHour >= 10 and currentHour < 14 then
+  if currentHour >= 6 and currentHour < 11 then
+    color = "catppuccin"
+  elseif currentHour >= 11 and currentHour < 15 then
     color = "kanagawa-wave"
-  elseif currentHour >= 14 and currentHour < 18 then
-    color = "tokyonight"
   else
-    color = "gruvbox"
+    color = "tokyonight"
   end
 
   return color
@@ -20,15 +18,13 @@ end
 return {
   { "ellisonleao/gruvbox.nvim" },
   { "rebelot/kanagawa.nvim" },
-  { "catppuccin/nvim", name = "catppuccin", priority = 1000 },
-  { "rose-pine/neovim", name = "rose-pine" },
+  { "catppuccin/catppuccin.nvim" },
   {
     "folke/tokyonight.nvim",
     lazy = false,
     priority = 1000,
     opts = {},
   },
-
   {
     "LazyVim/LazyVim",
     opts = {
