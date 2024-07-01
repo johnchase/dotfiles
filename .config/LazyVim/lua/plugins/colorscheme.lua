@@ -19,6 +19,7 @@ return {
   { "ellisonleao/gruvbox.nvim" },
   { "rebelot/kanagawa.nvim" },
   { "catppuccin/nvim", name = "catppuccin", priority = 1000 },
+  { "rose-pine/neovim", name = "rose-pine" },
   {
     "folke/tokyonight.nvim",
     lazy = false,
