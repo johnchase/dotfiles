@@ -1,23 +1,15 @@
 return {
   {
-    "williamboman/mason.nvim",
-    opts = function(_, opts)
-      vim.list_extend(opts.ensure_installed, {
-        "black",
-        "ruff",
-        "pyright",
-        "prettier",
-      })
-    end,
-  },
-
-  {
     "stevearc/conform.nvim",
-    optional = true,
     opts = {
       formatters_by_ft = {
-        python = { "black", "ruff", "isort" },
-        typescript = { "prettier" },
+        python = { "isort", "black" }, -- Add isort before black
+      },
+      formatters = {
+        isort = {
+          -- Add any isort-specific configuration here
+          prepend_args = { "--profile", "black" }, -- Optional: make isort compatible with black
+        },
       },
     },
   },
