@@ -40,3 +40,8 @@ brew install bash bc coreutils gawk gh glab gsed jq nowplaying-cli
 ```
 
 If needed install tmux plugins. Open tmux and run <leader>I
+Tmux is configured to use .tmux/plugins for plugin management, If you run into issues install tmp
+
+```bash
+git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+```
