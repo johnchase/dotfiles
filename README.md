@@ -30,6 +30,13 @@ git clone https://github.com/LazyVim/starter ~/.config/LazyVim
 rm -rf ~/.config/LazyVim/.git
 ```
 
-## Upgrade bash
+## Install dependencies for tmux UI
 
-OSX ships with bash 3.2, which will not work with the default tmux theme. To fix this run `brew install bash` even if you are running zsh
+OSX ships with bash 3.2, which will not work with the default tmux theme.
+
+```bash
+brew install --cask font-monaspace-nerd-font font-noto-sans-symbols-2
+brew install bash bc coreutils gawk gh glab gsed jq nowplaying-cli
+```
+
+If needed install tmux plugins. Open tmux and run <leader>I
