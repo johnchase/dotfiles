@@ -1,0 +1,24 @@
+[window]
+startup_mode = "Fullscreen"
+
+[env]
+TERM = "xterm-256color"
+
+[font]
+size = 18
+
+[font.bold]
+family = "Hack Nerd Font Mono"
+style = "Bold"
+
+[font.italic]
+family = "Hack Nerd Font Mono"
+style = "Italic"
+
+[font.normal]
+family = "Hack Nerd Font Mono"
+style = "Regular"
+
+[terminal.shell]
+program = "/opt/homebrew/bin/tmux"
+args = ["new-session", "-A", "-s", "main"]
