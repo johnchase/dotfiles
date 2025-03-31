@@ -86,21 +86,7 @@ eval "$(zoxide init --cmd cd zsh)"
 
 export PATH="/opt/homebrew/bin:$PATH"
 
-alias av="NVIM_APPNAME=AstroNvim nvim"
-alias chad="NVIM_APPNAME=NvChad nvim"
 alias lv="NVIM_APPNAME=LazyVim nvim"
-
- function nvims() {
-  items=("default" "AstroNvim" "NvChad", "LazyVim")
-   config=$(printf "%s\n" "${items[@]}" | fzf --prompt="  Neovim Config  " --height=~50% --layout=reverse --border --exit-0)
-   if [[ -z $config ]]; then
-     echo "Nothing selected"
-     return 0
-   elif [[ $config == "default" ]]; then
-     config=""
-   fi
-   NVIM_APPNAME=$config nvim $@
- }
 
 export PYTHONDONTWRITEBYTECODE=1 
 
@@ -154,14 +140,14 @@ export PYTHONDONTWRITEBYTECODE=1
 alias ca="conda deactivate; conda activate"
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$('$HOME/miniconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+__conda_setup="$('$HOME/miniforge3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
 if [ $? -eq 0 ]; then
     eval "$__conda_setup"
 else
-    if [ -f "$HOME/miniconda3/etc/profile.d/conda.sh" ]; then
-        . "$HOME/miniconda3/etc/profile.d/conda.sh"
+    if [ -f "$HOME/miniforge3/etc/profile.d/conda.sh" ]; then
+        . "$HOME/miniforge3/etc/profile.d/conda.sh"
     else
-        export PATH="$HOME/miniconda3/bin:$PATH"
+        export PATH="$HOME/miniforge3/bin:$PATH"
     fi
 fi
 unset __conda_setup
