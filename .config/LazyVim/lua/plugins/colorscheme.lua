@@ -7,7 +7,7 @@ local function getColorScheme()
   if currentHour >= 6 and currentHour < 11 then
     color = "gruvbox"
   elseif currentHour >= 11 and currentHour < 15 then
-    color = "kanagawa-wave"
+    color = "rose-pine"
   else
     color = "tokyonight"
   end
