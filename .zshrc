@@ -137,20 +137,34 @@ export PYTHONDONTWRITEBYTECODE=1
 # # Amazon Q post block. Keep at the bottom of this file.
 # [[ -f "${HOME}/Library/Application Support/amazon-q/shell/zshrc.post.zsh" ]] && builtin source "${HOME}/Library/Application Support/amazon-q/shell/zshrc.post.zsh"
 
-alias ca="conda deactivate; conda activate"
-# >>> conda initialize >>>
-# !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$('$HOME/miniforge3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
-if [ $? -eq 0 ]; then
-    eval "$__conda_setup"
-else
-    if [ -f "$HOME/miniforge3/etc/profile.d/conda.sh" ]; then
-        . "$HOME/miniforge3/etc/profile.d/conda.sh"
-    else
-        export PATH="$HOME/miniforge3/bin:$PATH"
-    fi
+# Try to find conda installation in common locations
+if [ -d "$HOME/miniforge3" ]; then
+    CONDA_PATH="$HOME/miniforge3"
+elif [ -d "$HOME/anaconda3" ]; then
+    CONDA_PATH="$HOME/anaconda3"
+elif [ -d "$HOME/miniconda3" ]; then
+    CONDA_PATH="$HOME/miniconda3"
+elif [ -d "/opt/conda" ]; then
+    CONDA_PATH="/opt/conda"
 fi
-unset __conda_setup
+
+# If conda was found, set it up
+if [ -n "$CONDA_PATH" ]; then
+    __conda_setup="$('$CONDA_PATH/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+    if [ $? -eq 0 ]; then
+        eval "$__conda_setup"
+    else
+        if [ -f "$CONDA_PATH/etc/profile.d/conda.sh" ]; then
+            . "$CONDA_PATH/etc/profile.d/conda.sh"
+        else
+            export PATH="$CONDA_PATH/bin:$PATH"
+        fi
+    fi
+    unset __conda_setup
+fi
+
+# Clean up
+unset CONDA_PATH
 # <<< conda initialize <<<
 #
 
