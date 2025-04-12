@@ -7,7 +7,7 @@ local function getColorScheme()
   if currentHour >= 6 and currentHour < 11 then
     color = "gruvbox"
   elseif currentHour >= 11 and currentHour < 15 then
-    color = "rose-pine"
+    color = "everforest"
   else
     color = "tokyonight"
   end
@@ -16,6 +16,7 @@ local function getColorScheme()
 end
 
 return {
+  { "neanias/everforest-nvim" },
   { "ellisonleao/gruvbox.nvim" },
   { "rebelot/kanagawa.nvim" },
   { "catppuccin/nvim", name = "catppuccin", priority = 1000 },
