@@ -8,15 +8,15 @@ TERM = "xterm-256color"
 size = 18
 
 [font.bold]
-family = "MonaspiceNe Nerd Font Mono"
+family = "JetBrainsMono Nerd Font"
 style = "Bold"
 
 [font.italic]
-family = "MonaspiceNe Nerd Font Mono"
+family = "JetBrainsMono Nerd Font"
 style = "Italic"
 
 [font.normal]
-family = "MonaspiceNe Nerd Font Mono"
+family = "JetBrainsMono Nerd Font"
 style = "Regular"
 
 [terminal.shell]

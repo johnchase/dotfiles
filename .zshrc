@@ -90,6 +90,11 @@ alias lv="NVIM_APPNAME=LazyVim nvim"
 
 export PYTHONDONTWRITEBYTECODE=1 
 
+# Paths for Nextflow
+export JAVA_HOME="/opt/homebrew/opt/openjdk"
+export PATH="$JAVA_HOME/bin:$PATH"
+export PATH="$HOME/bin:$PATH"
+
 # # Amazon Q pre block. Keep at the top of this file.
 # [[ -f "${HOME}/Library/Application Support/amazon-q/shell/zshrc.pre.zsh" ]] && builtin source "${HOME}/Library/Application Support/amazon-q/shell/zshrc.pre.zsh"
 #
@@ -170,3 +175,5 @@ unset CONDA_PATH
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
+fpath+=~/.zfunc; autoload -Uz compinit; compinit

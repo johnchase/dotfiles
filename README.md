@@ -23,7 +23,7 @@ This will stow everything, i.e. overwrite any existing dotfiles. If you want to 
 
 ## Install LazyVim into the correct location
 
-THis likely doesn't need to be done
+This likely doesn't need to be done
 
 ```bash
 git clone https://github.com/LazyVim/starter ~/.config/LazyVim
@@ -32,10 +32,12 @@ rm -rf ~/.config/LazyVim/.git
 
 ## Install dependencies for tmux UI
 
+### OSX instructions
+
 OSX ships with bash 3.2, which will not work with the default tmux theme.
 
 ```bash
-brew install --cask font-monaspace-nerd-font font-noto-sans-symbols-2
+brew install --cask font-monaspace-nerd-font font-noto-sans-symbols-2 brew tap homebrew/cask font-iosevka
 brew install bash bc coreutils gawk gh glab gsed jq nowplaying-cli
 ```
 

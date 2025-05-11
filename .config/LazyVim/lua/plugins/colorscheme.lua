@@ -16,6 +16,7 @@ local function getColorScheme()
 end
 
 return {
+  { "bluz71/vim-nightfly-colors", name = "nightfly", lazy = false, priority = 1000 },
   { "neanias/everforest-nvim" },
   { "ellisonleao/gruvbox.nvim" },
   { "rebelot/kanagawa.nvim" },
@@ -30,7 +31,8 @@ return {
   {
     "LazyVim/LazyVim",
     opts = {
-      colorscheme = getColorScheme(),
+      colorscheme = "nightfly",
+      -- colorscheme = getColorScheme(),
     },
   },
 }
