@@ -177,3 +177,5 @@ unset CONDA_PATH
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
 fpath+=~/.zfunc; autoload -Uz compinit; compinit
+
+ export PATH="/opt/homebrew/opt/krb5/bin:$PATH"

@@ -5,9 +5,9 @@ local function getColorScheme()
   local color
 
   if currentHour >= 6 and currentHour < 11 then
-    color = "gruvbox"
-  elseif currentHour >= 11 and currentHour < 15 then
     color = "everforest"
+  elseif currentHour >= 11 and currentHour < 15 then
+    color = "gruvbox"
   else
     color = "tokyonight"
   end
@@ -31,8 +31,8 @@ return {
   {
     "LazyVim/LazyVim",
     opts = {
-      colorscheme = "nightfly",
-      -- colorscheme = getColorScheme(),
+      -- colorscheme = "nightfly",
+      colorscheme = getColorScheme(),
     },
   },
 }
