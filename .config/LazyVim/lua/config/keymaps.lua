@@ -9,3 +9,9 @@ wk.add({
 
 -- add key map in case <S-CR> doesn't work. Like tmux for example
 vim.keymap.set({ "n", "i" }, "<C-w>p", "<S-CR>", { desc = "Pick window (like Shift+Enter)", remap = true })
+
+vim.keymap.set("n", "ga", function()
+  vim.cmd("vsplit")
+  -- Call the same function that gd uses
+  require("snacks.picker").lsp_definitions()
+end, { desc = "Go to definition in vertical split" })
