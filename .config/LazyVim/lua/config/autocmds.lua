@@ -8,3 +8,10 @@
 -- e.g. vim.api.nvim_del_augroup_by_name("lazyvim_wrap_spell")
 -- lua/config/filetypes.lua
 require("config.filetypes")
+-- Nextflow syntax highlighting
+vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
+  pattern = { "*.nf", "nextflow.config" },
+  callback = function()
+    vim.bo.filetype = "groovy"
+  end,
+})
