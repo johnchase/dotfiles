@@ -58,6 +58,7 @@ brew install node
 brew install ripgrep
 brew install lazygit
 brew install tmux
+brew install romkatv/powerlevel10k/powerlevel10k
 MasonInstall python toml etc
 ```
 
