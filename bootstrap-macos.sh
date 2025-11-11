@@ -86,6 +86,10 @@ else
   git clone "$REPO_URL" "$REPO_DIR"
 fi
 
+# --- Ensure origin is set to SSH ---
+log "Setting remote origin to SSH (git@github.com:johnchase/dotfiles.git)"
+git -C "$REPO_DIR" remote set-url origin git@github.com:johnchase/dotfiles.git || true
+
 cd "$REPO_DIR"
 
 ### 5. Stow shared + macOS-specific configs #####################################
