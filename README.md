@@ -54,6 +54,10 @@ brew install --cask font-jetbrains-mono-nerd-font
 brew install bash bc coreutils gawk gh glab gsed jq nowplaying-cli
 brew install fzf
 brew install zoxide
+brew install node
+brew install ripgrep
+brew install lazygit
+MasonInstall python toml etc
 ```
 
 If needed install tmux plugins. Open tmux and run <leader>I
@@ -63,13 +67,6 @@ Tmux is configured to use .tmux/plugins for plugin management, If you run into i
 git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 ```
 
-Need to install a bbunch of stuff
-
-brew install node
-brew install ripgrep
-brew install lazygit
-
-MasonInstall python toml etc
 Install mini surround through extras
 
 for lazygit
