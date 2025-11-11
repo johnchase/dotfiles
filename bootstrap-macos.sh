@@ -48,8 +48,6 @@ eval "$(brew shellenv)"
 
 log "Installing core packages via Homebrew..."
 
-brew tap homebrew/cask-fonts || true
-
 brew install -q \
   stow \
   tmux \
