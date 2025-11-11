@@ -57,6 +57,7 @@ brew install zoxide
 brew install node
 brew install ripgrep
 brew install lazygit
+brew install tmux
 MasonInstall python toml etc
 ```
 
