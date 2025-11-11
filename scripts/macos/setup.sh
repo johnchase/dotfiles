@@ -72,32 +72,13 @@ defaults write com.apple.dock wvous-br-modifier -int 0
 echo " - Hot corners set: BL=Mission Control, BR=Desktop"
 
 ###############################################################################
-# Caps Lock -> Escape (per-session via hidutil)
-#
-# Note: This mapping is not persisted across reboots by default.
-# For persistence, wrap this in a LaunchAgent that runs at login.
-###############################################################################
-
-if command -v hidutil >/dev/null 2>&1; then
-  hidutil property --set '{
-    "UserKeyMapping": [
-      {
-        "HIDKeyboardModifierMappingSrc": 0x700000039,
-        "HIDKeyboardModifierMappingDst": 0x700000029
-      }
-    ]
-  }' || echo " ! Warning: hidutil remap failed (permissions or no external keyboard yet)."
-  echo " - Caps Lock mapped to Escape (current session)"
-else
-  echo " ! hidutil not found; skipping Caps Lock remap."
-fi
-
-###############################################################################
 # Restart affected services
 ###############################################################################
 
-killall Dock >/dev/null 2>&1 || true
+echo "Restarting Finder, Dock, and SystemUIServer..."
+
 killall Finder >/dev/null 2>&1 || true
+killall Dock >/dev/null 2>&1 || true
 killall SystemUIServer >/dev/null 2>&1 || true
 
 echo "Done. Some changes may require log out / log in to fully apply."
