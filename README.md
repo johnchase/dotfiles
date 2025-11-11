@@ -20,6 +20,11 @@ git clone https://github.com/johnchase/dotfiles.git
 
 ## Run stow to sync the dotfiles
 
+### Install Stow
+```bash
+brew install stow
+```
+
 ```bash
 cd dotfiles
 stow *
