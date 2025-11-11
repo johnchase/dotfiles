@@ -1,7 +1,6 @@
 local function getColorScheme()
   local currentTime = os.date("*t")
   local currentHour = currentTime.hour
-
   local color
 
   if currentHour >= 6 and currentHour < 11 then

@@ -1,12 +1,11 @@
 return {
   {
-    "williamboman/mason-lspconfig.nvim",
+    "mason-org/mason-lspconfig.nvim",
     opts = {
       automatic_installation = true,
       ensure_installed = {
-        "tsserver",
+        "ts_ls",
         "pyright",
-        "ruff_lsp",
         "lua_ls",
         "bashls",
       },

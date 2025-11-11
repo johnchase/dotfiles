@@ -67,6 +67,7 @@ brew install -q \
   ripgrep \
   lazygit \
   tree \
+  uv \
   romkatv/powerlevel10k/powerlevel10k
 
 brew install --cask -q \
