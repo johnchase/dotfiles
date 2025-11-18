@@ -35,14 +35,30 @@ fi
 
 ### 2. Install Homebrew if missing #############################################
 
+ensure_brew() {
+  if command -v brew >/dev/null 2>&1; then
+    eval "$(brew shellenv)"
+    return 0
+  fi
+  for path in /opt/homebrew/bin/brew /usr/local/bin/brew; do
+    if [[ -x "$path" ]]; then
+      eval "$("$path" shellenv)"
+      return 0
+    fi
+  done
+  return 1
+}
+
+# Install if missing
 if ! command -v brew >/dev/null 2>&1; then
   log "Homebrew not found. Installing..."
   /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-else
-  log "Homebrew already installed."
 fi
 
-eval "$(brew shellenv)"
+if ! ensure_brew; then
+  warn "Unable to find Homebrew after installation; please check your PATH."
+  exit 1
+fi
 
 ### 3. Install core packages ####################################################
 
