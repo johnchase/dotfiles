@@ -40,6 +40,19 @@ defaults write NSGlobalDomain com.apple.mouse.tapBehavior -int 1
 echo " - Tap to click enabled"
 
 ###############################################################################
+# Mouse + trackpad cursor speed
+###############################################################################
+# Mouse tracking speed (0–3 roughly matches the System Settings slider;
+# you *can* go beyond 3.0, but 2.5–3.0 is already very fast).
+# Adjust these floats to taste.
+defaults write -g com.apple.mouse.scaling -float 2.5
+
+# Trackpad tracking speed (same idea as mouse)
+defaults write -g com.apple.trackpad.scaling -float 2.5
+
+echo " - Mouse and trackpad tracking speed increased"
+
+###############################################################################
 # Finder: show hidden files
 ###############################################################################
 
