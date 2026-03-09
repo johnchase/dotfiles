@@ -5,8 +5,7 @@ set -euo pipefail
 ### - Installs Homebrew (if missing)
 ### - Installs core CLI + GUI tools
 ### - Clones dotfiles repo (if needed)
-### - Stows shared + macOS-specific configs
-### - Sets up LazyVim (if not already)
+### - Stows shared + LazyVim + macOS-specific configs
 ### - Installs tmux plugin manager (TPM)
 ### - Preps lazygit config dir
 ### - Runs macOS defaults script (if present)
@@ -24,6 +23,30 @@ log() {
 
 warn() {
   printf "\033[1;33m[warn]\033[0m %s\n" "$*"
+}
+
+cleanup_legacy_lazyvim_links() {
+  local legacy_links=(
+    "$HOME/.neoconf.json"
+    "$HOME/after"
+    "$HOME/init.lua"
+    "$HOME/lazy-lock.json"
+    "$HOME/lazyvim.json"
+    "$HOME/lua"
+    "$HOME/stylua.toml"
+  )
+
+  local link=""
+  local target=""
+  for link in "${legacy_links[@]}"; do
+    if [[ -L "$link" ]]; then
+      target="$(readlink "$link" || true)"
+      if [[ "$target" == .config/LazyVim/* ]]; then
+        log "Removing legacy LazyVim link: $link -> $target"
+        rm "$link"
+      fi
+    fi
+  done
 }
 
 ### 1. OS check #################################################################
@@ -107,10 +130,32 @@ git -C "$REPO_DIR" remote set-url origin git@github.com:johnchase/dotfiles.git |
 
 cd "$REPO_DIR"
 
-### 5. Stow shared + macOS-specific configs #####################################
+### 5. Stow shared + LazyVim + macOS-specific configs ############################
 
-log "Stowing dotfiles (shared)..."
+cleanup_legacy_lazyvim_links
+
+LAZYVIM_DIR="$HOME/.config/LazyVim"
+
+if [[ -L "$LAZYVIM_DIR" && ! -e "$LAZYVIM_DIR" ]]; then
+  warn "Removing broken LazyVim symlink at $LAZYVIM_DIR."
+  rm "$LAZYVIM_DIR"
+fi
+
+if [[ -e "$LAZYVIM_DIR" && ! -L "$LAZYVIM_DIR" ]]; then
+  backup="$LAZYVIM_DIR.pre-dotfiles.$(date +%Y%m%d%H%M%S)"
+  warn "Found existing non-symlink LazyVim config. Moving to $backup"
+  mv "$LAZYVIM_DIR" "$backup"
+fi
+
+log "Stowing dotfiles (shared shell + terminal + tmux)..."
 stow -vt "$HOME" home
+
+if [[ -d "$REPO_DIR/lazyvim" ]]; then
+  log "Stowing LazyVim config..."
+  stow -vt "$HOME" lazyvim
+else
+  warn "lazyvim package not found at $REPO_DIR/lazyvim (skipping)."
+fi
 
 if [[ -d "$REPO_DIR/home-macos" ]]; then
   log "Stowing macOS-specific dotfiles..."
@@ -138,18 +183,12 @@ if [[ -f "$HOME/Library/LaunchAgents/com.johnchase.caps2esc.plist" ]]; then
   fi
 fi
 
-### 7. LazyVim setup (if needed) ###############################################
+### 7. Verify LazyVim config ####################################################
 
-LAZYVIM_DIR="$HOME/.config/LazyVim"
-
-if [[ -d "$LAZYVIM_DIR" ]]; then
-  log "LazyVim config already exists at $LAZYVIM_DIR."
+if [[ -f "$LAZYVIM_DIR/init.lua" ]]; then
+  log "LazyVim config is active at $LAZYVIM_DIR."
 else
-  # Only do this if you still rely on the LazyVim starter outside dotfiles.
-  log "LazyVim config not found; cloning LazyVim starter..."
-  git clone https://github.com/LazyVim/starter "$LAZYVIM_DIR"
-  rm -rf "$LAZYVIM_DIR/.git"
-  log "LazyVim starter installed. (Your dotfiles may override via lua/plugins/* and lazy-lock.json.)"
+  warn "LazyVim config not found at $LAZYVIM_DIR."
 fi
 
 ### 8. Tmux plugin manager (TPM) ###############################################
@@ -189,5 +228,5 @@ log "Bootstrap complete."
 echo
 echo "Notes:"
 echo "  - Open tmux and press Ctrl-b + I to install tmux plugins."
-echo "  - Open Neovim once to let LazyVim/Lazy sync plugins."
+echo "  - Open LazyVim once: NVIM_APPNAME=LazyVim nvim"
 echo "  - Some macOS settings may require log out / log in to fully apply."

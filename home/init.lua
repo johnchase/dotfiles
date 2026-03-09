@@ -1,1 +1,0 @@
-.config/LazyVim/init.lua

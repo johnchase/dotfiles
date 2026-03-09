@@ -25,7 +25,7 @@ Run this single command in a fresh macOS terminal:
 After setup:
 
 - Open `tmux` → press **Ctrl-b + I** to install plugins  
-- Open `nvim` once to sync LazyVim plugins  
+- Open `NVIM_APPNAME=LazyVim nvim` once to sync LazyVim plugins  
 - Log out/in to apply macOS settings  
 
 ---
@@ -56,6 +56,7 @@ brew install --cask alacritty font-jetbrains-mono-nerd-font
 git clone https://github.com/johnchase/dotfiles.git ~/dotfiles
 cd ~/dotfiles
 stow -vt "$HOME" home
+stow -vt "$HOME" lazyvim
 stow -vt "$HOME" home-macos
 ```
 
@@ -82,6 +83,16 @@ This sets:
 - Hot corners (bottom-left → Mission Control, bottom-right → Desktop)  
 - Caps Lock → Escape remap (persistent via LaunchAgent)
 
+### 6️⃣ Re-sync after pulling updates
+
+```bash
+cd ~/dotfiles
+git pull --ff-only
+stow -vt "$HOME" home
+stow -vt "$HOME" lazyvim
+stow -vt "$HOME" home-macos
+```
+
 ---
 
 ## 🧩 Project structure
@@ -90,11 +101,11 @@ This sets:
 dotfiles/
 ├── bootstrap-macos.sh           # full automated setup script
 ├── home/                        # shared configuration
+├── lazyvim/                     # LazyVim config (for NVIM_APPNAME=LazyVim)
 ├── home-macos/                  # macOS-specific files (e.g. LaunchAgents)
 ├── scripts/
 │   └── macos/
 │       └── setup.sh             # macOS defaults configuration
-├── launchagents/                # templates for LaunchAgents
 └── README.md
 ```
 
@@ -105,5 +116,5 @@ dotfiles/
 - `~/Library/LaunchAgents/com.johnchase.caps2esc.plist` should exist  
 - Caps Lock now behaves as Escape  
 - `tmux` shows your custom status bar  
-- `nvim` loads LazyVim with your plugins  
+- `NVIM_APPNAME=LazyVim nvim` loads LazyVim with your plugins  
 - macOS key repeat and hot corners reflect your preferences  
