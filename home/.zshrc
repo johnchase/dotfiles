@@ -8,6 +8,21 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${USER}.zsh" ]]; t
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${USER}.zsh"
 fi
 
+#### History (set EARLY, before any plugin can touch it) #######################
+
+HISTFILE="$HOME/.zsh_history"
+HISTSIZE=1000000
+SAVEHIST=$HISTSIZE
+
+setopt extended_history       # write timestamps to histfile
+setopt inc_append_history     # write each command to histfile as soon as it runs
+setopt share_history          # import new entries from histfile on every prompt
+setopt hist_ignore_space      # don't record lines starting with a space
+setopt hist_ignore_all_dups   # remove the older duplicate when a new one is added
+setopt hist_save_no_dups      # don't write duplicates to the file
+setopt hist_find_no_dups      # don't show duplicates when searching
+setopt hist_reduce_blanks     # collapse extra whitespace before saving
+
 #### Homebrew ##################################################################
 
 if command -v brew >/dev/null 2>&1; then
@@ -86,21 +101,6 @@ compinit
 
 # Replay compdefs defined by plugins/snippets
 zinit cdreplay -q
-
-#### History ###################################################################
-
-HISTSIZE=5000
-HISTFILE="$HOME/.zsh_history"
-SAVEHIST=$HISTSIZE
-HISTDUP=erase
-
-setopt appendhistory
-setopt sharehistory
-setopt hist_ignore_space
-setopt hist_ignore_all_dups
-setopt hist_save_no_dups
-setopt hist_ignore_dups
-setopt hist_find_no_dups
 
 #### Keybindings ###############################################################
 
