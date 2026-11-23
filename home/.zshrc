@@ -40,6 +40,20 @@ if [[ -r "$HOME/.p10k.zsh" ]]; then
   source "$HOME/.p10k.zsh"
 fi
 
+if [[ -n $TMUX ]]; then
+  # Make room below the two-line prompt, scrolling only near the bottom of the pane.
+  _tmux_prompt_margin() {
+    local -i lines_to_reserve=5
+    if [[ -t 1 ]] && (( LINES > lines_to_reserve + 2 )); then
+      repeat $lines_to_reserve printf '\n'
+      printf '\e[%dA' "$lines_to_reserve"
+    fi
+  }
+
+  autoload -Uz add-zsh-hook
+  add-zsh-hook precmd _tmux_prompt_margin
+fi
+
 #### Zinit plugins #############################################################
 
 # Core plugins
